@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Beth's Fruit Shake 'N Halo-Halo</title>
+  <style>
+    body { font-family: Arial,sans-serif; margin:20px; }
+    form { margin-bottom:30px; }
+    .row { display:flex; gap:10px; margin-bottom:5px; }
+    .row select, .row .input-group { display:flex; flex-direction:column; }
+    .row input { padding:5px; }
+    .input-group input { width:60px; }
+    .message { background:#eef; padding:10px; margin-bottom:20px; }
+    .preview { background:#ffe; padding:10px; margin-bottom:20px; border:1px dashed #ccc; }
+    ul { list-style:none; padding:0; }
+    li { margin:4px 0; }
+    .total, .trending { font-weight:bold; margin-top:20px; }
+    button.add { margin-bottom:10px; }
+    .button-group { margin-top:10px; }
+    .button-group input { margin-right:10px; }
+  </style>
+</head>
+<body>
+  <h1>Beth's Fruit Shake 'N Halo-Halo Register</h1>
+
+  <form method="POST" action="">
+    <div id="items-container">
+      <div class="row">
+        <select name="item[]">
+          <option value="buko_shake">Buko Shake – P35</option>
+          <option value="mango_shake">Mango Shake – P35</option>
+          <option value="banana_shake">Banana Shake – P35</option>
+          <option value="halo_halo">Halo‑Halo – P35</option>
+        </select>
+        <div class="input-group">
+          <label>Quantity</label>
+          <input type="number" name="quantity[]" value="1" min="0" title="Qty">
+        </div>
+        <div class="input-group">
+          <label>Add‑On Qty</label>
+          <input type="number" name="add_on_qty[]" value="0" min="0" title="Add‑On Qty">
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="add" onclick="
+      var c = document.getElementById('items-container');
+      var r = c.firstElementChild.cloneNode(true);
+      r.querySelectorAll('input').forEach(i=>i.value='0');
+      r.querySelector('select').selectedIndex = 0;
+      c.appendChild(r);
+    ">+ Add Item</button>
+    <br><br>
+
+    <label>Amount Given (P):
+      <input type="number" name="amount_given" step="0.01" min="0" required>
+    </label>
+    <br><br>
+
+    <div class="button-group">
+      <input type="submit" name="preview" value="Preview Order">
+      <input type="submit" value="Process Order">
+      <input type="submit" name="reset" value="Reset Sales">
+    </div>
+  </form>
+
+  <div class="message">
+    Buko Shake x2 + Add‑On x1 → P80.00<br>
+    Mango Shake x1 → P35.00<br>
+    <strong>Order Total: P115.00</strong><br>
+    Given: P200.00 | Change: P85.00
+  </div>
+
+  <h2>Sales Summary</h2>
+  <ul>
+    <li>14:30:25 – Buko Shake x2 + Add‑On x1 : P80.00</li>
+    <li>14:30:25 – Mango Shake x1 : P35.00</li>
+    <li>14:28:10 – Halo‑Halo x3 + Add‑On x2 : P125.00</li>
+  </ul>
+  <div class="total">Daily Total: P240.00</div>
+  <div class="trending">Most Trending Item: Halo‑Halo with Add‑On</div>
+</body>
+</html>
